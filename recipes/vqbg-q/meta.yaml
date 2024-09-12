@@ -1,0 +1,28 @@
+package:
+  name: vqbg
+  version: "1.0.0"
+
+source:
+  url: https://github.com/qdu-bioinfo/VQBG.git
+
+
+build:
+  number: 1
+  skip: false
+
+requirements:
+  build:
+    - gxx_linux-64
+    - cmake
+  run:
+    - libgcc-ng
+    - libstdcxx-ng
+
+test:
+  commands:
+    - ./VQBG
+
+about:
+  home: https://github.com/qdu-bioinfo/
+  license: MIT
+  summary: "A virus quasispecies assembly algorithm"
