@@ -1,16 +1,20 @@
 {% set name = "abyss" %}
-{% set version = "2.3.3" %}
-
+{% set version = "2.3.9" %}
+ 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 build:
   number: 0
+  run_exports:
+    - {{ pin_subpackage(name, max_pin="x") }}
 
 source:
   url: https://github.com/bcgsc/abyss/releases/download/{{ version }}/abyss-{{ version }}.tar.gz
-  sha256: 4b14642989e84f331d8d1a854cca67bdede95e90bd6813836c173a951d71405c
+  sha256: 55f0b27b67b4486dc6cbe132c0f4c228ee4f9e86c56292a7b50633df87e3212e
+  patches:
+    - config.patch
 
 requirements:
   build:
@@ -20,10 +24,12 @@ requirements:
     - boost-cpp
     - sparsehash
     - openmpi
+    - btllib
   run:
     - openmpi
     - make
     - util-linux  # [linux]
+    - perl
 
 test:
   commands:
@@ -33,13 +39,16 @@ test:
 
 about:
   home: http://www.bcgsc.ca/platform/bioinfo/software/abyss
-  license: GPL3
+  license: GPL-3.0-only
   license_file: LICENSE
-  summary: Assembly By Short Sequences - a de novo, parallel, paired-end sequence assembler
+  summary: Assembly By Short Sequences - a de novo, parallel, paired-end short read sequence assembler
   dev_url: https://github.com/bcgsc/abyss
   doc_url: https://github.com/bcgsc/abyss#readme
 
 extra:
+  additional-platforms:
+    - linux-aarch64
+    - osx-arm64
   container:
     # openmpi needs ssh/rsh
     extended-base: true

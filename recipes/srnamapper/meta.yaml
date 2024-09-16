@@ -1,5 +1,5 @@
 {% set name = "srnaMapper" %}
-{% set version = "1.0.7" %}
+{% set version = "1.0.10" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,12 @@ package:
 
 build:
   number: 0
+  run_exports:
+    - {{ pin_subpackage(name|lower, max_pin="x") }}
 
 source:
-  url: https://github.com/mzytnicki/srnaMapper/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 808077879014c2de9b0a389a15e0d9028a548a4c0d35593abc142366521b8174
+  url: https://github.com/mzytnicki/srnaMapper/releases/download/{{ version }}/{{ version }}.tar.gz
+  sha256: 2f0ae9a7302243977195a1eb1857c7d34f3b4c537fc0e324ec338e18799e389f
 
 requirements:
   build:
@@ -24,7 +26,7 @@ requirements:
 
 about:
   home: https://github.com/mzytnicki/srnaMapper
-  license: GPL3
+  license: GPL-3.0-or-later
   license_file: LICENSE
   summary: Mapping small RNA data to a genome.
 
@@ -35,4 +37,3 @@ test:
 extra:
   recipe-maintainers:
     - mzytnicki
-

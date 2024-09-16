@@ -1,10 +1,10 @@
-{% set name = "AnchorWave" %}
-{% set version = "1.0.0" %}
-{% set tag = "v1.0.0" %}
-{% set sha256 = "ca5a10f41a356a5a9c3ce4be550984eed94e395313eb5fff1bb65c4a7233a3e1" %}
+{% set name = "anchorwave" %}
+{% set version = "1.2.5" %}
+{% set tag = "v1.2.5" %}
+{% set sha256 = "440e233739582f1e3d7a3847a421919b4c426d4f4332f4d812ea4d23b9958cfa" %}
 
 package:
-  name: {{ name | lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
@@ -13,7 +13,12 @@ source:
 
 build:
   number: 0
-  skip: True  # [not linux]
+  script_env:
+    - TARGET_PLATFORM=macOS  # [osx]
+    - TARGET_PLATFORM=Linux  # [linux]
+  run_exports:
+    - {{ pin_subpackage(name, max_pin="x") }}
+  skip: True  # [not unix]
 
 requirements:
   build:

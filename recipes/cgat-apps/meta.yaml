@@ -1,17 +1,20 @@
-{% set version = "0.6.4" %}
+{% set name = "cgat-apps" %}
+{% set version = "0.7.2" %}
 
 package:
-  name: cgat-apps
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/c/cgat/cgat-{{ version }}.tar.gz
-  sha256: 9ec800fd8a928d058ad2ccfab810bd25089e44f9f3aadfa7e874dac659f2e21e
+  sha256: 746701d1a6677e8200092894c35c942383123fd8e22ab172f3ef6b2222b8eaef
 
   
 build:
-  skip: True # [py2k or py == 39]
-  number: 1
+  number: 2
+  skip: true # [py == 312]
+  run_exports:
+    - {{ pin_subpackage('cgat-apps', max_pin="x.x") }}
   entry_points:
     - cgat = cgat.cgat:main
 
@@ -26,13 +29,11 @@ requirements:
     - pysam
     - htslib
     - setuptools
-    - ucsc-wigtobigwig
   run:
     - python
-    - cgatcore>=0.6.5
+    - cgatcore
     - alignlib-lite
     - biopython
-    - future
     - matplotlib-base
     - numpy
     - pandas
@@ -43,14 +44,11 @@ requirements:
     - pyyaml
     - quicksect
     - scipy
-    - six
-    - jinja2
     - scikit-learn
     - sortedcontainers
     # Misc dependencies
     - bedtools
     - ucsc-bedgraphtobigwig
-    - ucsc-bedtobigbed
     - ucsc-wigtobigwig
     - coreutils
     - grep
