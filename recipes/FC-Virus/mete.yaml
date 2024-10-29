@@ -19,7 +19,7 @@ about:
   license: MIT
   license_file: https://github.com/qdu-bioinfo/FC-Virus/LICENSE
   summary: "Accurate Assembly of Full-length Consensus for Viral Quasispecies"
-
+  
 test:
   commands:
     - ./bin/FC-Virus --help
