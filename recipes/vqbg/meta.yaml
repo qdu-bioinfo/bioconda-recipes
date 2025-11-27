@@ -10,7 +10,7 @@ source:
   sha256: "6ca5e5dfdc23e6714af7f42d308b2e92c5d8963a77ee19743a6819e87f5a2027"
 
 build:
-  number: 0
+  number: 2
   skip: True  # [osx]
   run_exports:
     - {{ pin_subpackage("vqbg", max_pin="x") }}
